@@ -1,14 +1,18 @@
 [
   {
-    "subject": "01. ICT Foundations",
-    "chapters": [
+    "id": "economics",
+    "name": "Economics",
+    "image": "https://www.superprof.co.in/blog/wp-content/uploads/2023/06/economic-models.jpg",
+    "years": [
       {
-        "title": "Chapter Basics",
-        "videos": [
-          { "name": "Lesson 01: Overview", "id": "tqJOtuOV3hw" },
-          { "name": "Lesson 02: Concepts", "id": "Xz26aND-LS4" }
+        "id": "1st-year",
+        "label": "1st Year",
+        "subjects": [
+          { "id": "micro", "name": "Microeconomics" },
+          { "id": "macro", "name": "Macroeconomics" }
         ]
-      }
+      },
+      { "id": "2nd-year", "label": "2nd Year", "subjects": [] }
     ]
   }
 ]
