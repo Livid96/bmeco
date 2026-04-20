@@ -1,0 +1,26 @@
+---
+import data from '../../data/courses.json';
+
+export async function getStaticPaths() {
+  // This tells the site to generate pages for every year/dept combo in your JSON
+  return data.flatMap(dept => 
+    dept.years.map(year => ({
+      params: { dept: dept.id, year: year.id },
+      props: { subjects: year.subjects, deptName: dept.name }
+    }))
+  );
+}
+
+const { dept, year } = Astro.params;
+const { subjects, deptName } = Astro.props;
+---
+
+<Layout title={`${deptName} - ${year}`}>
+  <div class="grid-container">
+    {subjects.map(subject => (
+       <div class="subject-card-glass">
+         <h3>{subject.name}</h3>
+         </div>
+    ))}
+  </div>
+</Layout>
