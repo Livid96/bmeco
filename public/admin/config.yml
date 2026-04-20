@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  branch: main
+  open_authoring: true # Allows editors to submit changes for your approval
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "content"
+    label: "Video Database"
+    files:
+      - label: "Course Data"
+        name: "data"
+        file: "src/data/courses.json"
+        fields:
+          - {label: "Courses", name: "courses", widget: "list", fields: [
+              {label: "Subject", name: "subject", widget: "string"},
+              {label: "Chapters", name: "chapters", widget: "list", fields: [
+                {label: "Chapter Title", name: "title", widget: "string"},
+                {label: "Videos", name: "videos", widget: "list", fields: [
+                  {label: "Video Name", name: "name", widget: "string"},
+                  {label: "YouTube Video ID", name: "id", widget: "string"}
+                ]}
+              ]}
+            ]}
