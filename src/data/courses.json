@@ -1,12 +1,12 @@
 [
   {
-    "subject": "Physics",
+    "subject": "01. ICT Foundations",
     "chapters": [
       {
-        "title": "Kinematics",
+        "title": "Chapter Basics",
         "videos": [
-          { "name": "Motion in 1D", "id": "videoId1" },
-          { "name": "Vector Basics", "id": "videoId2" }
+          { "name": "Lesson 01: Overview", "id": "tqJOtuOV3hw" },
+          { "name": "Lesson 02: Concepts", "id": "Xz26aND-LS4" }
         ]
       }
     ]
