@@ -1,0 +1,14 @@
+[
+  {
+    "subject": "Physics",
+    "chapters": [
+      {
+        "title": "Kinematics",
+        "videos": [
+          { "name": "Motion in 1D", "id": "videoId1" },
+          { "name": "Vector Basics", "id": "videoId2" }
+        ]
+      }
+    ]
+  }
+]
