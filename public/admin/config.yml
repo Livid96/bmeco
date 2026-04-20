@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  repo: Livid96/bmeco
   branch: main
   open_authoring: true # Allows editors to submit changes for your approval
 
