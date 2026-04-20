@@ -1,0 +1,32 @@
+---
+import courses from '../../../data/courses.json';
+
+export async function getStaticPaths() {
+  return courses.flatMap((c) =>
+    c.years.map((y) => ({
+      params: { id: c.id, year: y.id },
+      props: { courseName: c.name, yearLabel: y.label, subjects: y.subjects },
+    }))
+  );
+}
+const { courseName, yearLabel, subjects } = Astro.props;
+---
+
+<div class="main-layout" style="display: flex; gap: 20px; padding: 20px;">
+    <aside class="glass-sidebar" style="width: 300px; height: 80vh; overflow-y: auto;">
+        <h2 class="text-accent">{courseName} ({yearLabel})</h2>
+        {subjects.map(sub => (
+            <div class="subject-section">
+                <button class="subject-btn">{sub.name}</button>
+                <div class="chapter-list">
+                    </div>
+            </div>
+        ))}
+    </aside>
+
+    <main class="player-container" style="flex-grow: 1;">
+        <div id="video-frame" class="glass-box" style="aspect-ratio: 16/9; background: #000;">
+            </div>
+        <h2 id="video-title" style="margin-top: 20px;">Select a lesson to begin</h2>
+    </main>
+</div>
