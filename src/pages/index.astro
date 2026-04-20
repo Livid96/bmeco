@@ -1,118 +1,20 @@
 ---
-import data from '../data/courses.json';
+import courses from '../../data/courses.json';
+export async function getStaticPaths() {
+  return courses.map((c) => ({ params: { id: c.id }, props: { course: c } }));
+}
+const { course } = Astro.props;
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Free-Edu | Ultimate Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-deep: #010816;
-            --bg-card: rgba(15, 23, 42, 0.6);
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent: #3a86ff;
-            --accent-glow: rgba(58, 134, 255, 0.4);
-            --text-main: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.5);
-            --danger: #ff4d4d;
-            --success: #00ff88;
-            --sidebar-width: 350px;
-            --transition-main: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg-deep); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
-
-        .ambient-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(58, 134, 255, 0.12), transparent 45%),
-                        radial-gradient(circle at 20% 80%, rgba(58, 134, 255, 0.08), transparent 45%);
-            z-index: -1; pointer-events: none;
-        }
-
-        nav {
-            position: sticky; top: 15px; z-index: 2000;
-            max-width: 1200px; margin: 15px auto; padding: 15px 25px;
-            background: rgba(10, 15, 30, 0.7); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border); border-radius: 25px;
-            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .logo-text { font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-decoration: none; }
-        
-        .dashboard-container {
-            max-width: 1350px; margin: 30px auto; padding: 0 25px;
-            display: grid; grid-template-columns: var(--sidebar-width) 1fr; gap: 35px;
-        }
-
-        .sidebar-menu { position: sticky; top: 110px; height: calc(100vh - 150px); overflow-y: auto; }
-        .chapter-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 24px; margin-bottom: 15px; overflow: hidden; }
-        .chapter-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); }
-        .chapter-header h3 { font-size: 0.85rem; font-weight: 800; color: #fff; text-transform: uppercase; }
-
-        .lesson-list { background: rgba(0,0,0,0.25); border-top: 1px solid var(--glass-border); }
-        .lesson-item { 
-            padding: 15px 20px; cursor: pointer; font-size: 0.85rem; color: var(--text-dim); 
-            border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.2s;
-        }
-        .lesson-item:hover { background: rgba(58, 134, 255, 0.1); color: #fff; padding-left: 28px; }
-
-        .video-player-wrapper { 
-            background: var(--bg-card); border-radius: 40px; border: 1px solid var(--glass-border); 
-            padding: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
-        }
-        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 25px; overflow: hidden; }
-
-        @media (max-width: 1024px) {
-            .dashboard-container { display: flex; flex-direction: column; }
-            .sidebar-menu { order: 2; }
-            .player-workspace { order: 1; }
-        }
-    </style>
-</head>
-<body>
-    <div class="ambient-layer"></div>
-
-    <nav>
-        <div class="logo-text">FREE-EDU</div>
-        <div style="color: var(--text-dim); font-size: 0.7rem;">MODERN LEARNING HUB</div>
-    </nav>
-
-    <div class="dashboard-container">
-        <aside class="sidebar-menu">
-            {data.map((course, index) => (
-                <div class="chapter-card">
-                    <div class="chapter-header">
-                        <h3>{course.subject}</h3>
-                    </div>
-                    <div class="lesson-list">
-                        {course.chapters.map((chap) => (
-                            <>
-                                <div style="padding: 10px 20px; font-size: 0.7rem; color: var(--accent); font-weight: 800;">{chap.title}</div>
-                                {chap.videos.map((vid) => (
-                                    <div class="lesson-item" onclick={`document.getElementById('youtube-engine').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0'`}>
-                                        {vid.name}
-                                    </div>
-                                ))}
-                            </>
-                        ))}
-                    </div>
+<div class="container">
+    <h1 class="faculty-title">{course.name} - Select Year</h1>
+    <div class="subject-grid">
+        {course.years.map((year) => (
+            <a href={`/dept/${course.id}/${year.id}`} class="card">
+                <div class="img-box">
+                    <img src={course.image} alt={year.label} />
                 </div>
-            ))}
-        </aside>
-
-        <main class="player-workspace">
-            <div class="video-player-wrapper">
-                <div class="video-container">
-                    <iframe id="youtube-engine" width="100%" height="100%" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-            </div>
-        </main>
+                <h3>{year.label}</h3>
+            </a>
+        ))}
     </div>
-</body>
-</html>
+</div>
