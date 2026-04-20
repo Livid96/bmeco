@@ -3,6 +3,6 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   site: 'https://livid96.github.io',
-  base: '/edu-portal',
+  base: '/bmeco',
   integrations: [tailwind()],
 });
